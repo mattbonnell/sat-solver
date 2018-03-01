@@ -49,20 +49,21 @@ char *classify() {
 	// "satisfiable", "unsatisfiable" or "tautology".
 	int numVariables = currentExpression->numvars;
 	int numClauses = currentExpression->numclauses;
-	int * truthValues = malloc(numVariables * sizeof(*truthValues));
-	int numPermutations = (int)pow((double)2, (double)numVariables);
+	// int * truthValues = malloc(numVariables * sizeof(*truthValues));
+	unsigned long numPermutations = (unsigned long)pow((double)2, (double)numVariables) - 1;
 	int truePermutations = 0;
-	for(int i = 0; i < numPermutations; i++){
-		for(int j = 0; j < numVariables; j++) {
-			truthValues[j] = i >> j & 1;
-		}
+	for(int permutation = 0; permutation <= numPermutations; permutation++){
+		// for(int j = 0; j < numVariables; j++) {
+		// 	truthValues[j] = i >> j & 1;
+		// }
 		int expressionIsTrue = true;
 		for(int k = 0; k < numClauses; k++){
 			int * currentClause = currentExpression->clauses[0];
 			int numlits = currentClause[0];
 			bool clauseIsTrue = false
 			for (int l = 1; l < numlits + 1; l++){
-				if(truthValues[currentClause[l] - 1]) == 1) {
+				int currentVar = currentClause[l] - 1;
+				if(((permutation >> currentVar) & 1 == 1) {
 					clauseIsTrue = true;
 					break;
 				}
