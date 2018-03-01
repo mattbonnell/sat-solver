@@ -6,7 +6,6 @@
 
 #include <stdio.h>
 #include "dimacs_reader.h"
-#include <math.h>
 
 typedef struct BooleanExpression {
 	int numvars;
@@ -52,7 +51,12 @@ char *classify() {
 	int numVariables = currentExpression->numvars;
 	int numClauses = currentExpression->numclauses;
 	// int * truthValues = malloc(numVariables * sizeof(*truthValues));
-	unsigned long numPermutations = (unsigned long)pow((double)2, (double)numVariables) - 1;
+	double temp = 1;
+	int i;
+	for(i = 0; i < numVariables; i++){
+		temp *= 2;
+	}
+	unsigned long numPermutations = (unsigned long)(temp - 1);
 	int truePermutations = 0;
 	int permutation;
 	for(permutation = 0; permutation <= numPermutations; permutation++){
