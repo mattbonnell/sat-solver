@@ -57,7 +57,7 @@ char *classify() {
 		temp *= 2;
 	}
 	unsigned long numPermutations = (unsigned long)(temp - 1);
-	int truePermutations = 0;
+	double truePermutations = 0;
 	int permutation;
 	for(permutation = 0; permutation <= numPermutations; permutation++){
 		// for(int j = 0; j < numVariables; j++) {
@@ -100,7 +100,7 @@ char *classify() {
 	}
 	if (truePermutations == 0){
 		return "unsatisfiable";
-	} else if (truePermutations == numPermutations){
+	} else if (truePermutations - 1 == numPermutations){
 		return "tautology";
 	} else {
 		return "satisfiable";
