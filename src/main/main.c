@@ -8,13 +8,13 @@
 #include "dimacs_reader.h"
 #include <math.h>
 
-typedef struct BooleanExpression {
+struct BooleanExpression {
 	int numvars;
 	int numclauses;
 	int ** clauses;
 };
 
-BooleanExpression * currentExpression;
+struct BooleanExpression * currentExpression;
 
 int currentClauseIndex;
 
