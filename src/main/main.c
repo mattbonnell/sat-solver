@@ -64,11 +64,11 @@ char *classify() {
 		for(k = 0; k < numClauses; k++){
 			int * currentClause = currentExpression->clauses[0];
 			int numlits = currentClause[0];
-			bool clauseIsTrue = 0;
+			int clauseIsTrue = 0;
 			int l;
 			for (l = 1; l < numlits + 1; l++){
 				int currentVar = currentClause[l] - 1;
-				if(((permutation >> currentVar) & 1 == 1) {
+				if((permutation >> currentVar) & 1 == 1) {
 					clauseIsTrue = 1;
 					break;
 				}
