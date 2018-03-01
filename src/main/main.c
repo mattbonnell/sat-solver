@@ -8,13 +8,13 @@
 #include "dimacs_reader.h"
 #include <math.h>
 
-struct BooleanExpression {
+typedef struct BooleanExpression {
 	int numvars;
 	int numclauses;
 	int ** clauses;
-};
+} BooleanExpression;
 
-struct BooleanExpression * currentExpression;
+BooleanExpression * currentExpression;
 
 int currentClauseIndex;
 
@@ -23,9 +23,9 @@ void init(int numvars, int numclauses) {
 	// Indicates start of a new expression with up to numvars variables
 	// and numclauses clauses.
 	if(currentExpression != 0){
-		free(*currentExpression);
+		free(currentExpression);
 	}
-	currentExpression = malloc(sizeof(currentExpression));
+	currentExpression = malloc(sizeof(*currentExpression));
 	currentExpression->numvars = numvars;
 	currentExpression->numclauses = numclauses;
 	currentExpression->clauses = malloc(numclauses * sizeof(*(currentExpression->clauses)));
