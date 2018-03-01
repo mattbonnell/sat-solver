@@ -12,7 +12,7 @@ struct BooleanExpression {
 	int numvars;
 	int numclauses;
 	int ** clauses;
-}
+};
 BooleanExpression * currentExpression;
 
 int currentClauseIndex;
