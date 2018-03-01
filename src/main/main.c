@@ -71,10 +71,22 @@ char *classify() {
 			int clauseIsTrue = 0;
 			int l;
 			for (l = 1; l < numlits + 1; l++){
-				int currentVar = currentClause[l] - 1;
-				if((permutation >> currentVar) & 1 == 1) {
-					clauseIsTrue = 1;
-					break;
+				int negated = 0;
+				int currentVar = currentClause[l];
+				if (currentVar < 0){
+					negated = 1;
+					currentVar *= -1;
+				}
+				if (negated == 1){
+					if((permutation >> (currentVar - 1)) & 1 == 0) {
+						clauseIsTrue = 1;
+						break;
+					}
+				} else {
+					if((permutation >> (currentVar - 1)) & 1 == 1) {
+						clauseIsTrue = 1;
+						break;
+					}
 				}
 			}
 			if (clauseIsTrue == 0){
