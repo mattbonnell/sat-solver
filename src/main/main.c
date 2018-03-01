@@ -39,7 +39,8 @@ void add_clause(int numlits, int literals[]) {
 	// Negative integers represent logical negations of variables.
 	currentExpression->clauses[currentClauseIndex] = malloc((numlits + 1) * sizeof(*(currentExpression->clauses[currentClauseIndex])));
 	currentExpression->clauses[currentClauseIndex][0] = numlits;
-	for(int i = 1; i < numlits + 1; i++){
+	int i;
+	for(i = 1; i < numlits + 1; i++){
 		currentExpression->clauses[currentClauseIndex][i] = literals[i];
 	}
 	currentClauseIndex++;
@@ -53,28 +54,31 @@ char *classify() {
 	// int * truthValues = malloc(numVariables * sizeof(*truthValues));
 	unsigned long numPermutations = (unsigned long)pow((double)2, (double)numVariables) - 1;
 	int truePermutations = 0;
-	for(int permutation = 0; permutation <= numPermutations; permutation++){
+	int permutation;
+	for(permutation = 0; permutation <= numPermutations; permutation++){
 		// for(int j = 0; j < numVariables; j++) {
 		// 	truthValues[j] = i >> j & 1;
 		// }
-		int expressionIsTrue = true;
-		for(int k = 0; k < numClauses; k++){
+		int expressionIsTrue = 1;
+		int k;
+		for(k = 0; k < numClauses; k++){
 			int * currentClause = currentExpression->clauses[0];
 			int numlits = currentClause[0];
-			bool clauseIsTrue = false
-			for (int l = 1; l < numlits + 1; l++){
+			bool clauseIsTrue = 0;
+			int l;
+			for (l = 1; l < numlits + 1; l++){
 				int currentVar = currentClause[l] - 1;
 				if(((permutation >> currentVar) & 1 == 1) {
-					clauseIsTrue = true;
+					clauseIsTrue = 1;
 					break;
 				}
 			}
-			if (clauseIsTrue == false){
-				expressionIsTrue = false;
+			if (clauseIsTrue == 0){
+				expressionIsTrue = 0;
 				break;
 			}
 		}
-		if (expressionIsTrue){
+		if (expressionIsTrue == 1){
 			truePermutations++;
 		}
 	}
