@@ -98,10 +98,10 @@ char *classify() {
 			truePermutations++;
 		}
 	}
-	printf("\nNumber of permutations: %d True Permutations: %d\n", numPermutations, truePermutations);
+	printf("\nNumber of permutations: %u True Permutations: %f\n", numPermutations, truePermutations);
 	if (truePermutations == 0){
 		return "unsatisfiable";
-	} else if (truePermutations - 1 == numPermutations){
+	} else if ((double)truePermutations - 1 == (double)numPermutations){
 		return "tautology";
 	} else {
 		return "satisfiable";
