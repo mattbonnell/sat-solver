@@ -66,7 +66,7 @@ char *classify() {
 		int expressionIsTrue = 1;
 		int k;
 		for(k = 0; k < numClauses; k++){
-			int * currentClause = currentExpression->clauses[0];
+			int * currentClause = currentExpression->clauses[k];
 			int numlits = currentClause[0];
 			int clauseIsTrue = 0;
 			int l;
@@ -101,7 +101,7 @@ char *classify() {
 	printf("\nNumber of permutations: %u True Permutations: %f\n", numPermutations, truePermutations);
 	if (truePermutations == 0){
 		return "unsatisfiable";
-	} else if ((double)truePermutations - 1 == (double)numPermutations){
+	} else if ((double)(truePermutations - 1) == (double)numPermutations){
 		return "tautology";
 	} else {
 		return "satisfiable";
