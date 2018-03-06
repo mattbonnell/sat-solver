@@ -58,7 +58,7 @@ char *classify() {
 	}
 	unsigned long numPermutations = (unsigned long)(temp - 1);
 	double truePermutations = 0;
-	int permutation;
+	unsigned long permutation;
 	for(permutation = 0; permutation <= numPermutations; permutation++){
 		// for(int j = 0; j < numVariables; j++) {
 		// 	truthValues[j] = i >> j & 1;
