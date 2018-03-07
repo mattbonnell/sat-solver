@@ -115,19 +115,19 @@ char *classify() {
 				}
 			}
 			if (clauseIsTrue == 0){
-				expressionIsTrue = 0;
-				falsePermutations++;
 				if(truePermutations > 0){
 					return "satisfiable";
 				}
+				expressionIsTrue = 0;
+				falsePermutations++;
 				break;
 			}
 		}
 		if (expressionIsTrue == 1){
-			truePermutations++;
 			if(falsePermutations > 0){
 				return "satisfiable";
 			}
+			truePermutations++;
 		}
 	}
 	//printf("\nNumber of permutations: %llu True Permutations: %llu\n", numPermutations, truePermutations);
