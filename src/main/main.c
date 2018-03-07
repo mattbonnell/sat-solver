@@ -10,7 +10,7 @@
 typedef struct BooleanExpression {
 	int numvars;
 	int numclauses;
-	int unsatisfiableByInspection = 0;
+	int unsatisfiableByInspection;
 	int ** clauses;
 } BooleanExpression;
 
@@ -35,6 +35,7 @@ void init(int numvars, int numclauses) {
 	currentExpression->numvars = numvars;
 	currentExpression->numclauses = numclauses;
 	currentExpression->clauses = malloc(numclauses * sizeof(*(currentExpression->clauses)));
+	currentExpression->unsatisfiableByInspection = 0;
 	currentClauseIndex = 0;
 }
 
@@ -43,11 +44,15 @@ void add_clause(int numlits, int literals[]) {
 	// The literals argument is an array of ints, numlits is its length.
 	// Each literal is the index (starting from 1) of a variable.
 	// Negative integers represent logical negations of variables.
+	if(currentExpression->unsatisfiableByInspection){
+		return;
+	}
 	if (numlits == 1){
 		int i;
 		for(i=0; i < numOfUnaryClauses; i++){
 			if(unaryClauses[i] == -1 * literals[0]) {
 				currentExpression->unsatisfiableByInspection = 1;
+				return;
 			}
 		}
 		unaryClauses[numOfUnaryClauses++] = literals[0];
