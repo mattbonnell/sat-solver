@@ -56,7 +56,7 @@ char *classify() {
 	for(i = 0; i < numVariables; i++){
 		numPermutations *= 2;
 	}
-	double truePermutations = 0;
+	unsigned long long truePermutations = 0;
 	unsigned long long permutation;
 	for(permutation = 0; permutation < numPermutations; permutation++){
 		// for(int j = 0; j < numVariables; j++) {
@@ -97,7 +97,7 @@ char *classify() {
 			truePermutations++;
 		}
 	}
-	printf("\nNumber of permutations: %lu True Permutations: %f\n", numPermutations, truePermutations);
+	printf("\nNumber of permutations: %llu True Permutations: %llu\n", numPermutations, truePermutations);
 	if (truePermutations == 0){
 		return "unsatisfiable";
 	} else if ((double)(truePermutations) == (double)numPermutations){
