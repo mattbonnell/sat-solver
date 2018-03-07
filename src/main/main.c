@@ -71,18 +71,19 @@ char *classify() {
 			int l;
 			for (l = 1; l < numlits + 1; l++){
 				int negated = 0;
-				int currentVar = currentClause[l];
-				if (currentVar < 0){
+				int currentVarIndex = currentClause[l];
+				if (currentVarIndex < 0){
 					negated = 1;
-					currentVar *= -1;
+					currentVarIndex *= -1;
 				}
+				int currentVarValue = (permutation >> (currentVarIndex - 1)) & 1;
 				if (negated == 1){
-					if((permutation >> (currentVar - 1)) & 1 == 0) {
+					if(currentVarValue == 0) {
 						clauseIsTrue = 1;
 						break;
 					}
 				} else {
-					if((permutation >> (currentVar - 1)) & 1 == 1) {
+					if(currentVarValue == 1) {
 						clauseIsTrue = 1;
 						break;
 					}
@@ -100,7 +101,7 @@ char *classify() {
 	printf("\nNumber of permutations: %llu True Permutations: %llu\n", numPermutations, truePermutations);
 	if (truePermutations == 0){
 		return "unsatisfiable";
-	} else if ((double)(truePermutations) == (double)numPermutations){
+	} else if (truePermutations == numPermutations){
 		return "tautology";
 	} else {
 		return "satisfiable";
