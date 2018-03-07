@@ -30,7 +30,7 @@ void init(int numvars, int numclauses) {
 		free(unaryClauses);
 	}
 	numOfUnaryClauses = 0;
-	unaryClauses = malloc(1000 * sizeof(*unaryClauses));
+	unaryClauses = malloc(100 * sizeof(*unaryClauses));
 	currentExpression = malloc(sizeof(*currentExpression));
 	currentExpression->numvars = numvars;
 	currentExpression->numclauses = numclauses;
@@ -74,19 +74,11 @@ char *classify() {
 	}
 	int numVariables = currentExpression->numvars;
 	int numClauses = currentExpression->numclauses;
-	// int * truthValues = malloc(numVariables * sizeof(*truthValues));
 	unsigned long long numPermutations = 1 << numVariables;
-	// int i;
-	// for(i = 0; i < numVariables; i++){
-	// 	numPermutations *= 2;
-	// }
 	unsigned long long truePermutations = 0;
 	unsigned long long falsePermutations = 0;
 	unsigned long long permutation;
 	for(permutation = 0; permutation < numPermutations; permutation++){
-		// for(int j = 0; j < numVariables; j++) {
-		// 	truthValues[j] = i >> j & 1;
-		// }
 		int expressionIsTrue = 1;
 		int k;
 		for(k = 0; k < numClauses; k++){
@@ -130,7 +122,6 @@ char *classify() {
 			truePermutations++;
 		}
 	}
-	//printf("\nNumber of permutations: %llu True Permutations: %llu\n", numPermutations, truePermutations);
 	if (truePermutations == 0){
 		return "unsatisfiable";
 	} else if (truePermutations == numPermutations){
