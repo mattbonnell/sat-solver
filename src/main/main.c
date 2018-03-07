@@ -51,15 +51,14 @@ char *classify() {
 	int numVariables = currentExpression->numvars;
 	int numClauses = currentExpression->numclauses;
 	// int * truthValues = malloc(numVariables * sizeof(*truthValues));
-	double temp = 1;
+	unsigned long long numPermutations = 1;
 	int i;
 	for(i = 0; i < numVariables; i++){
-		temp *= 2;
+		numPermutations *= 2;
 	}
-	unsigned long numPermutations = (unsigned long)(temp - 1);
 	double truePermutations = 0;
-	unsigned long permutation;
-	for(permutation = 0; permutation <= numPermutations; permutation++){
+	unsigned long long permutation;
+	for(permutation = 0; permutation < numPermutations; permutation++){
 		// for(int j = 0; j < numVariables; j++) {
 		// 	truthValues[j] = i >> j & 1;
 		// }
@@ -101,7 +100,7 @@ char *classify() {
 	printf("\nNumber of permutations: %lu True Permutations: %f\n", numPermutations, truePermutations);
 	if (truePermutations == 0){
 		return "unsatisfiable";
-	} else if ((double)(truePermutations - 1) == (double)numPermutations){
+	} else if ((double)(truePermutations) == (double)numPermutations){
 		return "tautology";
 	} else {
 		return "satisfiable";
