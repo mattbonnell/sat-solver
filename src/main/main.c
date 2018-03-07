@@ -98,7 +98,7 @@ char *classify() {
 			truePermutations++;
 		}
 	}
-	printf("\nNumber of permutations: %llu True Permutations: %llu\n", numPermutations, truePermutations);
+	//printf("\nNumber of permutations: %llu True Permutations: %llu\n", numPermutations, truePermutations);
 	if (truePermutations == 0){
 		return "unsatisfiable";
 	} else if (truePermutations == numPermutations){
