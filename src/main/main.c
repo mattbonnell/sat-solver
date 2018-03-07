@@ -10,12 +10,16 @@
 typedef struct BooleanExpression {
 	int numvars;
 	int numclauses;
+	int unsatisfiableByInspection = 0;
 	int ** clauses;
 } BooleanExpression;
 
 BooleanExpression * currentExpression;
 
 int currentClauseIndex;
+
+int unaryClauses[1000];
+int numOfUnaryClauses;
 
 void init(int numvars, int numclauses) {
 	// Callback function that gets passed to read_dimacs().
@@ -36,6 +40,19 @@ void add_clause(int numlits, int literals[]) {
 	// The literals argument is an array of ints, numlits is its length.
 	// Each literal is the index (starting from 1) of a variable.
 	// Negative integers represent logical negations of variables.
+	if(currentExpression->unsatisfiableByInspection){
+		return;
+	}
+	if (numlits == 1){
+		int i;
+		for(i=0; i < numOfUnaryClauses; i++){
+			if(unaryClauses[i] == -1 * literals[0]) {
+				currentExpression->unsatisfiableByInspection = 1;
+				return;
+			}
+		}
+		unaryClauses[numOfUnaryClauses++] = literals[0];
+	}
 	currentExpression->clauses[currentClauseIndex] = malloc((numlits + 1) * sizeof(*(currentExpression->clauses[currentClauseIndex])));
 	currentExpression->clauses[currentClauseIndex][0] = numlits;
 	int i;
@@ -48,6 +65,9 @@ void add_clause(int numlits, int literals[]) {
 char *classify() {
 	// Evaluate the current expression and return one of
 	// "satisfiable", "unsatisfiable" or "tautology".
+	if (currentExpression->unsatisfiableByInspection){
+		return "unsatisfiable";
+	}
 	int numVariables = currentExpression->numvars;
 	int numClauses = currentExpression->numclauses;
 	// int * truthValues = malloc(numVariables * sizeof(*truthValues));
