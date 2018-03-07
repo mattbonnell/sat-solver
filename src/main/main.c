@@ -117,6 +117,9 @@ char *classify() {
 			if (clauseIsTrue == 0){
 				expressionIsTrue = 0;
 				falsePermutations++;
+				if(truePermutations > 0){
+					return "satisfiable";
+				}
 				break;
 			}
 		}
