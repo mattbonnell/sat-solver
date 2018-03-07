@@ -75,11 +75,11 @@ char *classify() {
 	int numVariables = currentExpression->numvars;
 	int numClauses = currentExpression->numclauses;
 	// int * truthValues = malloc(numVariables * sizeof(*truthValues));
-	unsigned long long numPermutations = 1;
-	int i;
-	for(i = 0; i < numVariables; i++){
-		numPermutations *= 2;
-	}
+	unsigned long long numPermutations = 1 << numVariables;
+	// int i;
+	// for(i = 0; i < numVariables; i++){
+	// 	numPermutations *= 2;
+	// }
 	unsigned long long truePermutations = 0;
 	unsigned long long falsePermutations = 0;
 	unsigned long long permutation;
