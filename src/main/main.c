@@ -40,7 +40,7 @@ void add_clause(int numlits, int literals[]) {
 	currentExpression->clauses[currentClauseIndex][0] = numlits;
 	int i;
 	for(i = 1; i < numlits + 1; i++){
-		currentExpression->clauses[currentClauseIndex][i] = literals[i];
+		currentExpression->clauses[currentClauseIndex][i] = literals[i-1];
 	}
 	currentClauseIndex++;
 }
