@@ -18,7 +18,7 @@ BooleanExpression * currentExpression;
 
 int currentClauseIndex;
 
-int unaryClauses[1000];
+int * unaryClauses;
 int numOfUnaryClauses;
 
 void init(int numvars, int numclauses) {
@@ -27,7 +27,10 @@ void init(int numvars, int numclauses) {
 	// and numclauses clauses.
 	if(currentExpression != 0){
 		free(currentExpression);
+		free(unaryClauses);
 	}
+	numOfUnaryClauses = 0;
+	unaryClauses = malloc(1000 * sizeof(*unaryClauses));
 	currentExpression = malloc(sizeof(*currentExpression));
 	currentExpression->numvars = numvars;
 	currentExpression->numclauses = numclauses;
