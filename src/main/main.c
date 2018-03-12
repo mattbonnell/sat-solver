@@ -5,6 +5,7 @@
 // "unsatisfiable" or "tautology".
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "dimacs_reader.h"
 
 typedef struct BooleanExpression {
@@ -74,10 +75,10 @@ char *classify() {
 	}
 	int numVariables = currentExpression->numvars;
 	int numClauses = currentExpression->numclauses;
-	unsigned long long numPermutations = 1 << numVariables;
-	unsigned long long truePermutations = 0;
-	unsigned long long falsePermutations = 0;
-	unsigned long long permutation;
+	int numPermutations = 1 << numVariables;
+	int truePermutations = 0;
+	int falsePermutations = 0;
+	int permutation;
 	for(permutation = 0; permutation < numPermutations; permutation++){
 		int expressionIsTrue = 1;
 		int k;
