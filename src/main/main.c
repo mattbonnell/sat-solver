@@ -82,7 +82,7 @@ char *classify() {
 	for(permutation = 0; permutation < numPermutations; permutation++){
 		int expressionIsTrue = 1;
 		int k;
-		for(k = 0; k < numClauses; k++){
+		for(k = numclauses-1; k >= 0; k--){
 			int * currentClause = currentExpression->clauses[k];
 			int numlits = currentClause[0];
 			int clauseIsTrue = 0;
